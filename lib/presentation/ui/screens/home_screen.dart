@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holders/bottom_nav_bar_controller.dart';
 import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utilis/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/appbar_icon_button.dart';
@@ -98,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
         HeaderSection(
           title: ' All Categories',
           onTap: () {
-            Get.to(() => const CategoriesListScreen());
+            Get.find<BottomNavBarController>().categoryNav();
           },
         ),
         const SizedBox(height: 12),
