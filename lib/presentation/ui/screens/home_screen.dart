@@ -1,5 +1,7 @@
 import 'package:crafty_bay/presentation/state_holders/bottom_nav_bar_controller.dart';
-import 'package:crafty_bay/presentation/ui/screens/categories_list_screen.dart';
+import 'package:crafty_bay/presentation/state_holders/category_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/populer_product_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holders/special_product_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/utilis/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home/appbar_icon_button.dart';
 import 'package:crafty_bay/presentation/ui/widgets/home_banner_slider.dart';
@@ -55,9 +57,19 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Popular',
           onTap: () {},
         ),
-        const SizedBox(
+        SizedBox(
           height: 180,
-          child: HorinzantalProductListView(),
+          child: GetBuilder<SpecialProductListController>(
+              builder: (specialProductListController) {
+                return Visibility(
+                  visible: specialProductListController.inProgress == false,
+                  replacement: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  child: HorinzantalProductListView(
+                      productList: specialProductListController.productList),
+                );
+              }),
         )
       ],
     );
@@ -70,9 +82,19 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'New',
           onTap: () {},
         ),
-        const SizedBox(
+        SizedBox(
           height: 180,
-          child: HorinzantalProductListView(),
+          child: GetBuilder<PopularProductListController>(
+              builder: (popularProductListController) {
+            return Visibility(
+              visible: popularProductListController.inProgress == false,
+              replacement: const Center(
+                child: CircularProgressIndicator(),
+              ),
+              child: HorinzantalProductListView(
+                  productList: popularProductListController.productList),
+            );
+          }),
         )
       ],
     );
@@ -85,9 +107,19 @@ class _HomeScreenState extends State<HomeScreen> {
           title: 'Special',
           onTap: () {},
         ),
-        const SizedBox(
+        SizedBox(
           height: 180,
-          child: HorinzantalProductListView(),
+          child: GetBuilder<SpecialProductListController>(
+              builder: (specialProductListController) {
+                return Visibility(
+                  visible: specialProductListController.inProgress == false,
+                  replacement: const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  child: HorinzantalProductListView(
+                      productList: specialProductListController.productList),
+                );
+              }),
         )
       ],
     );
@@ -103,9 +135,20 @@ class _HomeScreenState extends State<HomeScreen> {
           },
         ),
         const SizedBox(height: 12),
-        const SizedBox(
+        SizedBox(
           height: 120,
-          child: HorizontalCategoryListView(),
+          child: GetBuilder<CategoryListController>(
+              builder: (categoryListController) {
+            return Visibility(
+                visible: categoryListController.inProgress == false,
+                replacement: const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                child: HorizontalCategoryListView(
+                  categoryList: categoryListController.categoryList
+                ),
+            );
+          }),
         ),
       ],
     );

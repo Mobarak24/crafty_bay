@@ -1,13 +1,15 @@
+import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/ui/screens/product_detatils_screen.dart';
 import 'package:crafty_bay/presentation/ui/utilis/app_colors.dart';
-import 'package:crafty_bay/presentation/ui/utilis/assets_path.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key,
+    super.key, required this.productModel,
   });
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +20,13 @@ class ProductCard extends StatelessWidget {
       child: Card(
         elevation: 3,
         child: SizedBox(
-          width: 120 ,
+          width: 140 ,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: 100,
-                width: 120,
+                height: 90,
+                width: 200,
                 padding: const EdgeInsets.all(16),
                 decoration: BoxDecoration(
                   color: AppColors.themeColor.withOpacity(0.15),
@@ -32,24 +34,24 @@ class ProductCard extends StatelessWidget {
                     topRight: Radius.circular(10),
                     topLeft: Radius.circular(10),
                   ),
-                  image: const DecorationImage(
-                      image: AssetImage(AssetsPath.dummyProductImage),
-                      fit: BoxFit.scaleDown
+                  image:  DecorationImage(
+                      image: NetworkImage(productModel.image ?? ''),
+                      fit: BoxFit.cover
                   ),
                 ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text('Product Name'),
+                   Text(productModel.title ?? ''),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('\$120'),
-                      const Wrap(
+                       Text(productModel.price ?? ''),
+                       Wrap(
                         children: [
-                          Icon(Icons.star,color: Colors.amber,),
-                          Text('4')
+                          const Icon(Icons.star,color: Colors.amber,),
+                          Text(productModel.star.toString()),
                         ],
                       ),
                       Card(
