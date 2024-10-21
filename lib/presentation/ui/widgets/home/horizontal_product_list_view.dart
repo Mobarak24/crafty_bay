@@ -15,7 +15,7 @@ class HorinzantalProductListView extends StatelessWidget {
       scrollDirection: Axis.horizontal,
       itemCount: productList.length,
       itemBuilder: (context, index) {
-        return  ProductCard(productModel: productList[index],);
+        return  ProductCard(productList: productList[index],);
       },
       separatorBuilder: (_, __) => const SizedBox(width: 8),
     );

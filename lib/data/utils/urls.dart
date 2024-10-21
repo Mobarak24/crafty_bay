@@ -3,7 +3,10 @@ class Urls{
 
   static const String sliderListUrl = '$_baseUrl/ListProductSlider';
   static const String categoryListUrl = '$_baseUrl/CategoryList';
-  static const String newProductListUrl = '$_baseUrl/ListProductByRemark/new';
-  static const String popularProductListUrl = '$_baseUrl/ListProductByRemark/popular';
-  static const String specialProductListUrl = '$_baseUrl/ListProductByRemark/special';
+
+  static String productListByRemark(String remark) =>
+      '$_baseUrl/ListProductByRemark/$remark';
+
+  static String productListByCategory(int categoryId) =>
+      '$_baseUrl/ListProductByCategory/$categoryId';
 }

@@ -1,11 +1,13 @@
 import 'package:crafty_bay/data/models/network_response.dart';
 import 'package:crafty_bay/data/models/product_list_model.dart';
-import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/data/services/network_caller.dart';
-import 'package:crafty_bay/data/utils/urls.dart';
 import 'package:get/get.dart';
 
-class PopularProductListController extends GetxController {
+import '../../data/models/product_model.dart';
+import '../../data/utils/urls.dart';
+
+class ProductListCategoryController extends GetxController{
+
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;
@@ -18,19 +20,20 @@ class PopularProductListController extends GetxController {
 
   List<ProductModel> get productList => _productList;
 
-  Future<bool> getPopularProductList() async {
+  Future<bool> getProductListCategory(int categoryId) async{
     bool isSuccess = false;
     _inProgress = true;
     update();
-    NetworkResponse response = await Get.find<NetworkCaller>()
-        .getRequest(url: Urls.productListByRemark('popular'));
 
-    if (response.isSuccess) {
+    NetworkResponse response = await Get.find<NetworkCaller>()
+        .getRequest(url: Urls.productListByCategory(categoryId) ?? '');
+
+    if(response.isSuccess){
       isSuccess = true;
       _errorMessage = null;
       _productList =
           ProductListModel.fromJson(response.responseData).productList ?? [];
-    } else {
+    }else{
       _errorMessage = response.errorMessage;
     }
 
@@ -38,4 +41,9 @@ class PopularProductListController extends GetxController {
     update();
     return isSuccess;
   }
+
+
+
+
+
 }

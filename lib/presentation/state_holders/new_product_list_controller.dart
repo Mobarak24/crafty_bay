@@ -25,7 +25,7 @@ class NewProductListController extends GetxController{
     update();
 
     NetworkResponse response =
-        await Get.find<NetworkCaller>().getRequest(url: Urls.newProductListUrl);
+        await Get.find<NetworkCaller>().getRequest(url: Urls.productListByRemark('new'));
     if(response.isSuccess){
       _errorMessage = null;
       isSuccess = true;

@@ -6,10 +6,10 @@ import 'package:get/get.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key, required this.productModel,
+    super.key, required this.productList,
   });
 
-  final ProductModel productModel;
+  final ProductModel productList;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +35,7 @@ class ProductCard extends StatelessWidget {
                     topLeft: Radius.circular(10),
                   ),
                   image:  DecorationImage(
-                      image: NetworkImage(productModel.image ?? ''),
+                      image: NetworkImage(productList.image ?? ''),
                       fit: BoxFit.cover
                   ),
                 ),
@@ -43,15 +43,15 @@ class ProductCard extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                   Text(productModel.title ?? ''),
+                   Text(productList.title ?? ''),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                       Text(productModel.price ?? ''),
+                       Text('\$${productList.price}'),
                        Wrap(
                         children: [
                           const Icon(Icons.star,color: Colors.amber,),
-                          Text(productModel.star.toString()),
+                          Text ('${productList.star}')
                         ],
                       ),
                       Card(
