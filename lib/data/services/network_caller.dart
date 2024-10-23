@@ -91,14 +91,13 @@ class NetworkCaller {
   void _responseLog(String url, int statusCode, dynamic responseBody,
       Map<String, dynamic> headers, bool isSuccess,
       [dynamic error]) {
-    String message = ('''
+    String message = '''
    Url : $url
    Status Code : $statusCode
    Headers : $headers
    Response Body: $responseBody
    Error : $error
-   ''');
-
+   ''';
     if (isSuccess) {
       logger.i(message);
     } else {

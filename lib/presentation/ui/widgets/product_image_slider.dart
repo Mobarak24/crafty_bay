@@ -4,7 +4,9 @@ import 'package:crafty_bay/presentation/ui/utilis/assets_path.dart';
 import 'package:flutter/material.dart';
 
 class ProductImageSlider extends StatefulWidget {
-  const ProductImageSlider({super.key});
+  const ProductImageSlider({super.key, required this.imageSlider});
+
+  final List<String> imageSlider;
 
   @override
   State<ProductImageSlider> createState() => _ProductImageSliderState();
@@ -25,15 +27,16 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
               },
             viewportFraction: 1,
               ),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imageSlider.map((imageSlider) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: Colors.grey.shade100,
-                      image: const DecorationImage(
-                        image: AssetImage(AssetsPath.dummyProductImage)
+                      image:  DecorationImage(
+                        image: NetworkImage(imageSlider),
+                        fit: BoxFit.fill
                       ),
                   ),
                 );
@@ -51,7 +54,7 @@ class _ProductImageSliderState extends State<ProductImageSlider> {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    for (int i = 0; i < 5; i++)
+                    for (int i = 0; i < widget.imageSlider.length; i++)
                       Container(
                         height: 12,
                         width: 12,
